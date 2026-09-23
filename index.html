@@ -1,0 +1,1104 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alberto Val Fernández — Desarrollador Full Stack</title>
+<meta name="description" content="Desarrollador web full stack especializado en MVC, APIs REST y microservicios. Experiencia en integración de datos del mercado eléctrico con Python, Laravel y Java.">
+<meta property="og:title" content="Alberto Val Fernández — Desarrollador Full Stack">
+<meta property="og:description" content="Desarrollador web full stack. MVC, APIs REST y microservicios aplicados al mercado eléctrico.">
+<meta property="og:type" content="profile">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://avalf27.github.io/">
+<meta property="og:image" content="https://avalf27.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Alberto Val Fernández — Desarrollador web full stack">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://avalf27.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23A75C22'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' text-anchor='middle' fill='%23fff'%3EAV%3C/text%3E%3C/svg%3E">
+<script>
+/* Tema guardado antes del primer pintado: evita el destello del tema equivocado. */
+(function(){ try { var t = localStorage.getItem("tema");
+  if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t); } catch(e){} })();
+</script>
+<style>
+/* ── Tokens ──────────────────────────────────────────────────────── */
+:root{
+  --ground:#F1F4F5; --ground-2:#FFFFFF; --surface:#FFFFFF;
+  --line:#D8DFE2; --line-soft:#E5EAEC;
+  --ink:#131C21; --ink-2:#566871;
+  --accent:#A75C22; --accent-soft:rgba(167,92,34,.10);
+  --accent-2:#2E706A;
+  --glow:rgba(167,92,34,.13);
+  --shadow:0 1px 2px rgba(19,28,33,.05), 0 8px 24px -12px rgba(19,28,33,.18);
+
+  --font-mono:ui-monospace,"Cascadia Code","Cascadia Mono","SF Mono","JetBrains Mono",Consolas,"Liberation Mono",monospace;
+  --font-sans:system-ui,-apple-system,"Segoe UI Variable Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --fs-hero:clamp(2.35rem,6.5vw,4.4rem);
+  --fs-h2:clamp(1.35rem,2.6vw,1.75rem);
+  --fs-h3:1.06rem;
+  --fs-small:.875rem;
+  --fs-label:.7rem;
+
+  --rail:190px;
+  --pad:clamp(1.25rem,5vw,3.5rem);
+  --measure:66ch;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ground:#0D1317; --ground-2:#131C21; --surface:#172128;
+    --line:#24323A; --line-soft:#1C272E;
+    --ink:#E6ECEF; --ink-2:#93A5AE;
+    --accent:#D9884A; --accent-soft:rgba(217,136,74,.14);
+    --accent-2:#59A39C;
+    --glow:rgba(217,136,74,.16);
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0D1317; --ground-2:#131C21; --surface:#172128;
+  --line:#24323A; --line-soft:#1C272E;
+  --ink:#E6ECEF; --ink-2:#93A5AE;
+  --accent:#D9884A; --accent-soft:rgba(217,136,74,.14);
+  --accent-2:#59A39C;
+  --glow:rgba(217,136,74,.16);
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+:root[data-theme="light"]{
+  color-scheme:light;
+  --ground:#F1F4F5; --ground-2:#FFFFFF; --surface:#FFFFFF;
+  --line:#D8DFE2; --line-soft:#E5EAEC;
+  --ink:#131C21; --ink-2:#566871;
+  --accent:#A75C22; --accent-soft:rgba(167,92,34,.10);
+  --accent-2:#2E706A;
+  --glow:rgba(167,92,34,.13);
+  --shadow:0 1px 2px rgba(19,28,33,.05), 0 8px 24px -12px rgba(19,28,33,.18);
+}
+
+/* ── Base ────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--font-sans); font-size:1rem; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-family:var(--font-mono); font-weight:600; text-wrap:balance; letter-spacing:-.015em; line-height:1.15}
+p{margin:0; max-width:var(--measure)}
+ul,ol{margin:0; padding:0; list-style:none}
+a{color:inherit}
+img{max-width:100%; display:block}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
+main:focus{outline:none}
+
+.skip{position:absolute; left:-9999px; top:0; z-index:99;
+  background:var(--surface); color:var(--ink); padding:.7rem 1.1rem; border:1px solid var(--line)}
+.skip:focus{left:.75rem; top:.75rem}
+.sr-only{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden;
+  clip:rect(0 0 0 0); white-space:nowrap; border:0}
+
+.label{
+  font-family:var(--font-mono); font-size:var(--fs-label); font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2);
+}
+
+/* ── Animación: estados iniciales solo si hay JS ─────────────────── */
+.js .reveal{opacity:0; transform:translateY(16px)}
+.js .reveal.is-in{opacity:1; transform:none;
+  transition:opacity .7s var(--ease), transform .7s var(--ease)}
+/* Las tarjetas conservan sus transiciones de hover una vez reveladas. */
+.js .card.reveal.is-in{
+  transition:opacity .7s var(--ease), transform .3s var(--ease), border-color .25s, box-shadow .3s}
+.js .lift{opacity:0; transform:translateY(105%)}
+.js .lift.is-in{opacity:1; transform:none;
+  transition:opacity .9s var(--ease), transform .9s var(--ease)}
+
+/* ── Cabecera ────────────────────────────────────────────────────── */
+.masthead{position:relative; border-bottom:1px solid var(--line); background:var(--ground-2); overflow:hidden}
+#curve{position:absolute; inset:auto 0 0 0; width:100%; height:62%; display:block; pointer-events:none}
+.masthead__inner{
+  position:relative; z-index:1; max-width:1240px; margin:0 auto;
+  padding:clamp(3.5rem,10vh,6rem) var(--pad) clamp(3rem,8vh,4.5rem);
+  display:grid; gap:2.75rem; grid-template-columns:1fr;
+}
+@media (min-width:940px){
+  .masthead__inner{grid-template-columns:minmax(0,1fr) 290px; gap:4rem; align-items:center}
+}
+
+.masthead__meta{display:flex; flex-wrap:wrap; gap:.5rem 1.25rem; margin-bottom:1.5rem}
+.masthead__meta span{display:inline-flex; align-items:center; gap:.45rem}
+.masthead__meta span::before{
+  content:""; width:5px; height:5px; background:var(--accent); border-radius:50%;
+  animation:pulse 2.6s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.35; transform:scale(.75)}}
+
+h1{font-size:var(--fs-hero); letter-spacing:-.035em; line-height:1.02}
+.h1-line{display:block; overflow:hidden}
+.role{
+  margin-top:1rem; font-family:var(--font-mono); font-size:clamp(.95rem,2vw,1.2rem);
+  color:var(--accent); letter-spacing:-.01em; min-height:1.4em;
+}
+.role .caret{display:inline-block; width:.55em; background:var(--accent); color:transparent;
+  animation:blink 1.05s steps(1) infinite}
+@keyframes blink{0%,49%{opacity:1} 50%,100%{opacity:0}}
+.pitch{margin-top:1.75rem; max-width:54ch; color:var(--ink-2); font-size:1.06rem}
+
+.actions{display:flex; flex-wrap:wrap; gap:.65rem; margin-top:2.25rem}
+.btn{
+  position:relative; display:inline-flex; align-items:center; gap:.5rem; padding:.6rem 1.05rem;
+  font-family:var(--font-mono); font-size:var(--fs-small); text-decoration:none;
+  border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  transition:border-color .2s, color .2s, transform .2s var(--ease);
+}
+.btn:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px)}
+.btn--primary{background:var(--accent); border-color:var(--accent); color:var(--ground-2)}
+.btn--primary:hover{color:var(--ground-2); filter:brightness(1.1)}
+
+/* ── Retrato ─────────────────────────────────────────────────────── */
+.portrait{
+  position:relative; justify-self:center; width:100%; max-width:290px; margin:0;
+  aspect-ratio:4/5; perspective:900px;
+}
+.portrait__frame{
+  position:relative; width:100%; height:100%; overflow:hidden;
+  background:var(--surface); border:1px solid var(--line);
+  transform-style:preserve-3d; transition:transform .35s var(--ease);
+  will-change:transform;
+}
+.portrait img{width:100%; height:100%; object-fit:cover; filter:saturate(.82) contrast(1.05)}
+.portrait.is-empty img{display:none}
+.portrait__mono{
+  display:none; position:absolute; inset:0; place-items:center;
+  font-family:var(--font-mono); font-size:4.5rem; font-weight:600; letter-spacing:-.05em;
+  color:var(--accent); background:
+    radial-gradient(120% 90% at 50% 15%, var(--accent-soft), transparent 70%), var(--surface);
+}
+.portrait.is-empty .portrait__mono{display:grid}
+/* Trama de barrido, como una lectura de instrumento */
+.portrait__frame::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:repeating-linear-gradient(to bottom, transparent 0 3px, var(--glow) 3px 4px);
+  mix-blend-mode:overlay; opacity:.5;
+}
+.portrait__tick{position:absolute; width:11px; height:11px; border:1px solid var(--accent); opacity:.85}
+.portrait__tick:nth-of-type(1){top:-1px; left:-1px; border-right:0; border-bottom:0}
+.portrait__tick:nth-of-type(2){top:-1px; right:-1px; border-left:0; border-bottom:0}
+.portrait__tick:nth-of-type(3){bottom:-1px; left:-1px; border-right:0; border-top:0}
+.portrait__tick:nth-of-type(4){bottom:-1px; right:-1px; border-left:0; border-top:0}
+.portrait__cap{
+  position:absolute; left:0; bottom:-1.7rem;
+  font-family:var(--font-mono); font-size:var(--fs-label); letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-2);
+}
+
+/* ── Estructura ──────────────────────────────────────────────────── */
+.shell{display:grid; grid-template-columns:1fr; max-width:1240px; margin:0 auto}
+@media (min-width:1000px){.shell{grid-template-columns:var(--rail) minmax(0,1fr); gap:var(--pad)}}
+
+.rail{display:none}
+@media (min-width:1000px){
+  .rail{display:block; position:sticky; top:0; align-self:start;
+    height:100vh; padding:var(--pad) 0 var(--pad) var(--pad)}
+  .rail ol{margin:.9rem 0 0; display:flex; flex-direction:column; gap:.1rem}
+  .rail a{
+    display:block; padding:.3rem 0 .3rem .95rem; text-decoration:none;
+    font-family:var(--font-mono); font-size:var(--fs-small); color:var(--ink-2);
+    border-left:2px solid var(--line); transition:color .25s, border-color .25s, padding-left .25s var(--ease);
+  }
+  .rail a:hover{color:var(--ink); padding-left:1.25rem}
+  .rail a[aria-current="true"]{color:var(--accent); border-left-color:var(--accent); padding-left:1.25rem}
+}
+
+main{padding:0 var(--pad); min-width:0}
+@media (min-width:1000px){main{padding-right:var(--pad); padding-left:0}}
+
+.section{padding:clamp(3rem,7vw,4.75rem) 0; border-bottom:1px solid var(--line-soft)}
+.section:last-of-type{border-bottom:0}
+.section__head{display:flex; align-items:baseline; gap:1rem; margin-bottom:2rem}
+.section__head::after{
+  content:""; flex:1; height:1px; background:var(--line);
+  transform-origin:left; transition:transform .9s var(--ease) .15s;
+}
+.js .section__head::after{transform:scaleX(0)}
+.js .section.is-in .section__head::after{transform:scaleX(1)}
+.section h2{font-size:var(--fs-h2)}
+
+/* ── Proyectos ───────────────────────────────────────────────────── */
+.projects{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.card{
+  position:relative; display:flex; flex-direction:column; gap:.8rem; padding:1.5rem;
+  background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow);
+  transform-style:preserve-3d; will-change:transform;
+  transition:border-color .25s, transform .3s var(--ease), box-shadow .3s;
+}
+.card::before{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:0;
+  background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%), var(--glow), transparent 65%);
+  transition:opacity .3s;
+}
+.card:hover{border-color:var(--accent)}
+.card:hover::before{opacity:1}
+.card > *{position:relative}
+.card h3{font-size:var(--fs-h3); color:var(--ink)}
+.card p{font-size:var(--fs-small); color:var(--ink-2); flex:1}
+.card__ctx{font-family:var(--font-mono); font-size:var(--fs-label); letter-spacing:.1em;
+  text-transform:uppercase; color:var(--accent-2)}
+.tags{display:flex; flex-wrap:wrap; gap:.35rem}
+.tag{
+  display:inline-flex; align-items:center; gap:.4rem;
+  font-family:var(--font-mono); font-size:.72rem; padding:.2rem .5rem;
+  color:var(--ink-2); background:var(--accent-soft); border:1px solid var(--line);
+  transition:color .2s, border-color .2s;
+}
+.tag:hover{color:var(--accent); border-color:var(--accent)}
+
+/* ── Iconos de tecnología ────────────────────────────────────────── */
+.sprite{position:absolute; width:0; height:0; overflow:hidden}
+.ico{
+  width:1.25em; height:1.25em; flex:none;
+  fill:none; stroke:currentColor; stroke-width:1.7;
+  stroke-linecap:round; stroke-linejoin:round;
+  color:var(--accent); opacity:.85; transition:opacity .2s;
+}
+.tag:hover .ico{opacity:1}
+.stack .tag{font-size:.78rem; padding:.3rem .55rem}
+
+/* ── Experiencia ─────────────────────────────────────────────────── */
+.jobs{display:flex; flex-direction:column; gap:2.75rem}
+.job{display:grid; gap:.35rem 2rem}
+@media (min-width:760px){.job{grid-template-columns:11.5rem minmax(0,1fr)}}
+.job__when{font-family:var(--font-mono); font-size:var(--fs-small); color:var(--ink-2);
+  font-variant-numeric:tabular-nums; padding-top:.2rem}
+.job__where{display:flex; flex-wrap:wrap; align-items:baseline; gap:.5rem .75rem}
+.job__where h3{font-size:var(--fs-h3)}
+.job__where > span{font-size:var(--fs-small); color:var(--ink-2)}
+.job__role{font-family:var(--font-mono); font-size:var(--fs-small); color:var(--accent); margin:.35rem 0 .9rem}
+.bullets{display:flex; flex-direction:column; gap:.55rem}
+.bullets li{position:relative; padding-left:1.15rem; color:var(--ink-2); max-width:var(--measure)}
+.bullets li::before{
+  content:""; position:absolute; left:0; top:.72em; width:6px; height:1px; background:var(--accent);
+  transform-origin:left; transition:transform .5s var(--ease);
+}
+.js .bullets li::before{transform:scaleX(0)}
+.js .section.is-in .bullets li::before{transform:scaleX(1)}
+.bullets strong{color:var(--ink); font-weight:600}
+
+/* ── Stack + formación ───────────────────────────────────────────── */
+.grid-2{display:grid; gap:2.5rem}
+@media (min-width:820px){.grid-2{grid-template-columns:1fr 1fr; gap:3rem}}
+.stack{display:flex; flex-direction:column; gap:1.35rem}
+.stack__row{display:flex; flex-direction:column; gap:.5rem}
+.study{display:flex; flex-direction:column; gap:.2rem; padding-bottom:1.25rem; margin-bottom:1.25rem;
+  border-bottom:1px solid var(--line-soft)}
+.study:last-child{border-bottom:0; padding-bottom:0; margin-bottom:0}
+.study h3{font-size:.98rem}
+.study > span{font-size:var(--fs-small); color:var(--ink-2); font-family:var(--font-mono);
+  font-variant-numeric:tabular-nums}
+.badge{
+  display:inline-block; font-family:var(--font-mono); font-size:var(--fs-label);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--accent-2);
+  border:1px solid var(--accent-2); padding:.1rem .4rem; margin-left:.5rem; vertical-align:.1em;
+}
+
+/* ── Contacto + pie ──────────────────────────────────────────────── */
+.contact{display:flex; flex-direction:column; gap:1.5rem}
+.contact__links{display:flex; flex-direction:column; gap:.15rem}
+.contact__links a{
+  display:inline-flex; align-items:baseline; gap:.85rem; width:fit-content; max-width:100%;
+  padding:.55rem 0; text-decoration:none; font-family:var(--font-mono); font-size:.95rem;
+  border-bottom:1px solid transparent; overflow-wrap:anywhere;
+  transition:color .2s, border-color .2s, transform .25s var(--ease);
+}
+.contact__links a:hover{color:var(--accent); border-bottom-color:var(--accent); transform:translateX(5px)}
+.contact__links .label{flex:0 0 4.5rem}
+
+footer{
+  padding:2rem var(--pad) 3rem; border-top:1px solid var(--line);
+  font-family:var(--font-mono); font-size:var(--fs-small); color:var(--ink-2);
+  display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; justify-content:space-between;
+  max-width:1240px; margin:0 auto;
+}
+
+/* ── Conmutador de tema ──────────────────────────────────────────── */
+#theme{
+  position:fixed; top:1rem; right:1rem; z-index:20;
+  width:2.4rem; height:2.4rem; display:grid; place-items:center; cursor:pointer;
+  background:var(--surface); color:var(--ink-2); border:1px solid var(--line);
+  font-family:var(--font-mono); font-size:.95rem; line-height:1;
+  transition:color .2s, border-color .2s, transform .3s var(--ease);
+}
+#theme:hover{color:var(--accent); border-color:var(--accent); transform:rotate(180deg)}
+
+/* ── Sin animación ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important; animation-iteration-count:1 !important;
+    transition-duration:.001ms !important}
+  .js .reveal,.js .lift{opacity:1; transform:none}
+  .js .section__head::after{transform:scaleX(1)}
+  .js .bullets li::before{transform:scaleX(1)}
+}
+
+/* ── Impresión ───────────────────────────────────────────────────── */
+@media print{
+  :root{--ground:#fff; --ground-2:#fff; --surface:#fff; --ink:#000; --ink-2:#333; --accent:#8a4a15}
+  #theme,.rail,#curve,.actions{display:none}
+  .js .reveal,.js .lift{opacity:1; transform:none}
+  .section{page-break-inside:avoid; border-bottom:1px solid #ccc}
+  .card{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add("js");</script>
+
+<!-- Iconos de tecnología: trazo de 24×24, heredan color del contenedor. -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-php" viewBox="0 0 24 24">
+    <path d="M8.2 8 4.4 12l3.8 4"/>
+    <path d="M12.6 9.9a2.6 2.6 0 0 1 4.5 1.8c0 1.7-2.2 1.9-2.2 3.3"/>
+    <circle cx="14.9" cy="17.7" r=".9" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-js" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="18" height="18" rx="3.5"/>
+    <path d="M7.5 10.2h3.2M7.5 13.4h3.2"/>
+    <path d="M13.6 8.8 17 12l-3.4 3.2"/>
+  </symbol>
+  <symbol id="i-python" viewBox="0 0 24 24">
+    <!-- Dos siluetas cerradas y entrelazadas: la inferior es la superior girada 180°. -->
+    <path d="M5.6 3H18.4A1.6 1.6 0 0 1 20 4.6v6.9a1.6 1.6 0 0 1-1.6 1.6h-3.6a1.6 1.6 0 0 1-1.6-1.6V8.5H5.6A1.6 1.6 0 0 1 4 6.9V4.6A1.6 1.6 0 0 1 5.6 3Z"/>
+    <circle cx="7" cy="5.75" r=".8" fill="currentColor" stroke="none"/>
+    <path d="M5.6 3H18.4A1.6 1.6 0 0 1 20 4.6v6.9a1.6 1.6 0 0 1-1.6 1.6h-3.6a1.6 1.6 0 0 1-1.6-1.6V8.5H5.6A1.6 1.6 0 0 1 4 6.9V4.6A1.6 1.6 0 0 1 5.6 3Z" transform="rotate(180 12 12)"/>
+    <circle cx="17" cy="18.25" r=".8" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-java" viewBox="0 0 24 24">
+    <path d="M4.5 10.5H15V15a4 4 0 0 1-4 4H8.5a4 4 0 0 1-4-4z"/>
+    <path d="M15 11.5h1.6a2.4 2.4 0 0 1 0 4.8H15"/>
+    <path d="M7.5 8c0-1.4 1.8-1.4 1.8-2.8M11.3 8c0-1.4 1.8-1.4 1.8-2.8"/>
+  </symbol>
+  <symbol id="i-laravel" viewBox="0 0 24 24">
+    <!-- «L» isométrica cerrada: contorno completo + pliegue entre el vástago y el pie. -->
+    <path d="M5.8 5.4 9.2 3.4v10l9 5.3-3.4 2-9-5.3Z"/>
+    <path d="M9.2 13.4 5.8 15.4"/>
+  </symbol>
+  <symbol id="i-blade" viewBox="0 0 24 24">
+    <path d="M9.5 4c-1.6 0-2.2.8-2.2 2.1v2.2c0 1.1-.7 1.9-2.1 1.9 1.4 0 2.1.8 2.1 1.9v2.2C7.3 15.6 7.9 16.4 9.5 16.4" transform="translate(0 1.8)"/>
+    <path d="M14.5 4c1.6 0 2.2.8 2.2 2.1v2.2c0 1.1.7 1.9 2.1 1.9-1.4 0-2.1.8-2.1 1.9v2.2c0 1.3-.6 2.1-2.2 2.1" transform="translate(0 1.8)"/>
+  </symbol>
+  <symbol id="i-db" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="6" rx="7.5" ry="3"/>
+    <path d="M4.5 6v12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/>
+    <path d="M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/>
+  </symbol>
+  <symbol id="i-devops" viewBox="0 0 24 24">
+    <path d="M8.6 9.2a2.9 2.9 0 1 0 0 5.8c2.8 0 4.1-5.8 6.8-5.8a2.9 2.9 0 1 1 0 5.8c-2.7 0-4-5.8-6.8-5.8z"/>
+  </symbol>
+  <symbol id="i-git" viewBox="0 0 24 24">
+    <rect x="5.7" y="5.7" width="12.6" height="12.6" rx="2" transform="rotate(45 12 12)"/>
+    <path d="M9.2 14.8 14.8 9.2M12 12l2.8 2.8"/>
+    <circle cx="14.8" cy="9.2" r="1.3" fill="currentColor" stroke="none"/>
+    <circle cx="9.2" cy="14.8" r="1.3" fill="currentColor" stroke="none"/>
+    <circle cx="14.8" cy="14.8" r="1.3" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-github" viewBox="0 0 24 24">
+    <circle cx="7" cy="5" r="2.2"/>
+    <circle cx="7" cy="19" r="2.2"/>
+    <circle cx="17" cy="7.5" r="2.2"/>
+    <path d="M7 7.2v9.6"/>
+    <path d="M14.8 7.5h-2.3a5.5 5.5 0 0 0-5.5 5.5v.5"/>
+  </symbol>
+  <symbol id="i-cicd" viewBox="0 0 24 24">
+    <path d="M4.3 12a7.7 7.7 0 0 1 13.1-5.4"/>
+    <path d="M17.9 2.8v3.9H14"/>
+    <path d="M19.7 12a7.7 7.7 0 0 1-13.1 5.4"/>
+    <path d="M6.1 21.2v-3.9H10"/>
+  </symbol>
+  <symbol id="i-pipeline" viewBox="0 0 24 24">
+    <circle cx="4.6" cy="12" r="2.1"/>
+    <circle cx="12" cy="6.4" r="2.1"/>
+    <circle cx="12" cy="17.6" r="2.1"/>
+    <circle cx="19.4" cy="12" r="2.1"/>
+    <path d="M6.3 10.7 10.3 7.7M6.3 13.3l4 3M13.7 7.7l4 3M13.7 16.3l4-3"/>
+  </symbol>
+  <symbol id="i-mvc" viewBox="0 0 24 24">
+    <path d="M12 3.2 20.8 7.4 12 11.6 3.2 7.4z"/>
+    <path d="M3.2 12 12 16.2 20.8 12"/>
+    <path d="M3.2 16.6 12 20.8l8.8-4.2"/>
+  </symbol>
+  <symbol id="i-api" viewBox="0 0 24 24">
+    <path d="M3.5 9h14"/>
+    <path d="M14 5.5 17.5 9 14 12.5"/>
+    <path d="M20.5 15h-14"/>
+    <path d="M10 11.5 6.5 15 10 18.5"/>
+  </symbol>
+  <symbol id="i-micro" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+    <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+    <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+    <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+    <path d="M10 6.5h4M10 17.5h4M6.5 10v4M17.5 10v4"/>
+  </symbol>
+  <symbol id="i-copilot" viewBox="0 0 24 24">
+    <rect x="3.5" y="8" width="17" height="11.5" rx="4"/>
+    <circle cx="9" cy="13.5" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="15" cy="13.5" r="1.1" fill="currentColor" stroke="none"/>
+    <path d="M12 8V5.2"/>
+    <circle cx="12" cy="3.9" r="1.2" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-claude" viewBox="0 0 24 24">
+    <path d="M12 4.2v15.6M4.2 12h15.6M6.5 6.5 17.5 17.5M17.5 6.5 6.5 17.5"/>
+  </symbol>
+  <symbol id="i-angular" viewBox="0 0 24 24">
+    <path d="M12 2.6 3.9 5.5l1.3 11.1L12 21.4l6.8-4.8 1.3-11.1z"/>
+    <path d="M8.5 15.4 12 7.4l3.5 8"/>
+    <path d="M9.8 13.1h4.4"/>
+  </symbol>
+  <symbol id="i-react" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/>
+    <ellipse cx="12" cy="12" rx="9.6" ry="3.7"/>
+    <ellipse cx="12" cy="12" rx="9.6" ry="3.7" transform="rotate(60 12 12)"/>
+    <ellipse cx="12" cy="12" rx="9.6" ry="3.7" transform="rotate(-60 12 12)"/>
+  </symbol>
+</svg>
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<button id="theme" type="button" aria-label="Cambiar entre tema claro y oscuro">◐</button>
+
+<header class="masthead">
+  <canvas id="curve" aria-hidden="true"></canvas>
+  <div class="masthead__inner">
+
+    <div>
+      <div class="masthead__meta label reveal">
+        <span>Andorra (Teruel), España</span>
+        <span>Disponible para nuevos proyectos</span>
+      </div>
+      <h1>
+        <span class="h1-line"><span class="lift" style="display:block">Alberto Val</span></span>
+        <span class="h1-line"><span class="lift" style="display:block">Fernández</span></span>
+      </h1>
+      <p class="role">Desarrollador web full stack</p>
+      <p class="pitch reveal">
+        Construyo aplicaciones con arquitectura MVC, APIs REST y microservicios. Desde septiembre
+        de 2024 trabajo dentro del mercado eléctrico español: integrando datos de ESIOS y Red
+        Eléctrica, y desarrollando el backoffice con el que las comercializadoras facturan a sus clientes.
+      </p>
+      <div class="actions reveal">
+        <a class="btn btn--primary" href="mailto:avalfdez@gmail.com">Escríbeme</a>
+        <a class="btn" href="https://www.linkedin.com/in/albertovalfernandez" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/avalf27" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="CV_Alberto_Val.pdf" download>Descargar CV</a>
+      </div>
+    </div>
+
+    <figure class="portrait reveal" id="retrato">
+      <div class="portrait__frame" id="marco">
+        <img src="foto.jpg" alt="Retrato de Alberto Val Fernández" id="foto">
+        <div class="portrait__mono" aria-hidden="true">AV</div>
+      </div>
+      <span class="portrait__tick" aria-hidden="true"></span>
+      <span class="portrait__tick" aria-hidden="true"></span>
+      <span class="portrait__tick" aria-hidden="true"></span>
+      <span class="portrait__tick" aria-hidden="true"></span>
+      <figcaption class="portrait__cap">Alberto Val · Full stack</figcaption>
+    </figure>
+
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Índice de secciones">
+    <p class="label">Secciones</p>
+    <ol>
+      <li><a href="#perfil">Perfil</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#formacion">Formación</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ol>
+  </nav>
+
+  <main id="contenido" tabindex="-1">
+
+    <section class="section" id="perfil">
+      <div class="section__head"><h2 class="reveal">Perfil</h2></div>
+      <p class="reveal" style="color:var(--ink-2); margin-bottom:1.1rem">
+        Desarrollador web full stack con dos años de experiencia en aplicaciones con
+        arquitectura MVC, APIs REST y microservicios. Me adapto rápido a lenguajes y tecnologías
+        nuevos: he trabajado en el mismo proyecto con PHP, Python y Java según lo que pedía cada
+        pieza del sistema.
+      </p>
+      <p class="reveal" style="color:var(--ink-2); margin-bottom:1.1rem">
+        Uso GitHub Copilot y Claude Code a diario como herramientas de asistencia, no como
+        sustituto del criterio: aceleran la escritura, pero la revisión de código, la documentación
+        y las decisiones de arquitectura siguen siendo trabajo mío.
+      </p>
+      <p class="reveal" style="color:var(--ink-2)">
+        Compagino el trabajo con una especialización en Análisis de Datos y formación práctica en
+        Angular 19 y React. Busco un equipo que valore el código de calidad, el trabajo
+        colaborativo y el crecimiento profesional continuo.
+      </p>
+    </section>
+
+    <section class="section" id="proyectos">
+      <div class="section__head"><h2 class="reveal">Proyectos</h2></div>
+      <p class="reveal" style="color:var(--ink-2); margin-bottom:2rem">
+        Trabajo profesional desarrollado en ASIC XXI. El código es propiedad de la empresa, así que
+        aquí describo el problema, mi papel y las decisiones técnicas.
+      </p>
+      <div class="projects">
+
+        <article class="card reveal">
+          <p class="card__ctx">Datos de mercado</p>
+          <h3>Integración de datos energéticos</h3>
+          <p>
+            Sistema en Python que recupera y trata datos energéticos actuales e históricos desde las
+            APIs de ESIOS y Red Eléctrica (PVOP), dejándolos normalizados y listos para el resto de
+            servicios del ERP.
+          </p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">APIs REST</span><span class="tag">ETL</span></div>
+        </article>
+
+        <article class="card reveal">
+          <p class="card__ctx">Producto interno</p>
+          <h3>Backoffice de facturación eléctrica</h3>
+          <p>
+            Aplicación en Laravel y Blade para la gestión integral de facturación, clientes y
+            suministros de comercializadoras de electricidad. Es la herramienta con la que el
+            personal de las comercializadoras trabaja cada día.
+          </p>
+          <div class="tags"><span class="tag">Laravel</span><span class="tag">Blade</span><span class="tag">MySQL</span><span class="tag">MVC</span></div>
+        </article>
+
+        <article class="card reveal">
+          <p class="card__ctx">Backend distribuido</p>
+          <h3>Servicios de procesos de mercado</h3>
+          <p>
+            Soluciones backend en Java para los procesos del mercado eléctrico, optimizando la
+            integración y el tratamiento de datos entre sistemas. Incluye la gestión y el despliegue
+            de los microservicios en entornos de desarrollo y producción.
+          </p>
+          <div class="tags"><span class="tag">Java</span><span class="tag">Microservicios</span><span class="tag">CI/CD</span></div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="section" id="experiencia">
+      <div class="section__head"><h2 class="reveal">Experiencia</h2></div>
+      <div class="jobs">
+
+        <article class="job reveal">
+          <p class="job__when">Sep 2024 — Actualidad</p>
+          <div>
+            <div class="job__where">
+              <h3>ASIC XXI</h3>
+              <span>Zaragoza</span>
+            </div>
+            <p class="job__role">Desarrollador Full Stack · Prácticas (Sep–Dic 2024) → Contrato (Dic 2024–hoy)</p>
+            <ul class="bullets">
+              <li>Desarrollo de un <strong>backoffice en Laravel/Blade</strong> para la gestión integral de facturación, clientes y suministros de comercializadoras de electricidad.</li>
+              <li>Proyecto en <strong>Python</strong> para la recuperación y el tratamiento de datos energéticos actuales e históricos mediante las APIs de ESIOS y Red Eléctrica (PVOP).</li>
+              <li>Soluciones <strong>backend en Java</strong> para procesos del mercado eléctrico, optimizando la integración y el tratamiento de datos entre sistemas.</li>
+              <li>Gestión y despliegue de <strong>microservicios</strong>, controlando entornos de desarrollo y producción para garantizar estabilidad y escalabilidad.</li>
+              <li><strong>Azure DevOps</strong>: gestión de repositorios, revisión y aprobación de pull requests, configuración de pipelines CI/CD e integración entre entornos.</li>
+              <li>Gestión de incidencias y soporte técnico a clientes y compañeros mediante sistema de tickets en ERP propio y Azure DevOps.</li>
+              <li>Metodología <strong>ágil (Scrum)</strong>: dailies, sprints quincenales con demos y planificación colaborativa, con foco en calidad y documentación.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="job reveal">
+          <p class="job__when">Abr 2022 — Jun 2022</p>
+          <div>
+            <div class="job__where">
+              <h3>DS Smith</h3>
+              <span>Andorra (Teruel)</span>
+            </div>
+            <p class="job__role">Técnico Informático</p>
+            <ul class="bullets">
+              <li>Instalación, configuración y mantenimiento de equipos informáticos, impresoras y redes locales.</li>
+              <li>Resolución de incidencias de hardware y software con soporte presencial y remoto, documentando los casos con herramientas de ticketing.</li>
+              <li>Administración básica de sistemas: usuarios, copias de seguridad y actualización de sistemas operativos.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="section" id="stack">
+      <div class="section__head"><h2 class="reveal">Stack</h2></div>
+      <div class="grid-2">
+        <div class="stack reveal">
+          <div class="stack__row">
+            <p class="label">Lenguajes</p>
+            <div class="tags">
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-php"></use></svg>PHP</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-js"></use></svg>JavaScript</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-python"></use></svg>Python</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-java"></use></svg>Java</span>
+            </div>
+          </div>
+          <div class="stack__row">
+            <p class="label">Frameworks</p>
+            <div class="tags">
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-laravel"></use></svg>Laravel</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-blade"></use></svg>Blade</span>
+            </div>
+          </div>
+          <div class="stack__row">
+            <p class="label">Bases de datos</p>
+            <div class="tags">
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-db"></use></svg>MySQL</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-db"></use></svg>PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+        <div class="stack reveal">
+          <div class="stack__row">
+            <p class="label">DevOps</p>
+            <div class="tags">
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-devops"></use></svg>Azure DevOps</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-git"></use></svg>Git</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-github"></use></svg>GitHub</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-cicd"></use></svg>CI/CD</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-pipeline"></use></svg>Pipelines</span>
+            </div>
+          </div>
+          <div class="stack__row">
+            <p class="label">Arquitecturas</p>
+            <div class="tags">
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-mvc"></use></svg>MVC</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-api"></use></svg>APIs REST</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-micro"></use></svg>Microservicios</span>
+            </div>
+          </div>
+          <div class="stack__row">
+            <p class="label">Asistencia IA</p>
+            <div class="tags">
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-copilot"></use></svg>GitHub Copilot</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-claude"></use></svg>Claude Code</span>
+            </div>
+          </div>
+          <div class="stack__row">
+            <p class="label">En formación</p>
+            <div class="tags">
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-angular"></use></svg>Angular 19</span>
+              <span class="tag"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-react"></use></svg>React</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="formacion">
+      <div class="section__head"><h2 class="reveal">Formación</h2></div>
+      <div class="grid-2">
+        <div class="reveal">
+          <div class="study">
+            <h3>Especialización en Análisis de Datos<span class="badge">En curso</span></h3>
+            <span>thePower Business School</span>
+          </div>
+          <div class="study">
+            <h3>Técnico Superior en Desarrollo de Aplicaciones Web</h3>
+            <span>Colegio Montessori, Zaragoza · Dic 2024</span>
+          </div>
+          <div class="study">
+            <h3>Técnico en Sistemas Microinformáticos y Redes</h3>
+            <span>IES Bajo Aragón, Alcañiz · Jun 2022</span>
+          </div>
+        </div>
+        <div class="stack reveal">
+          <div class="stack__row">
+            <p class="label">Idiomas</p>
+            <div class="tags"><span class="tag">Español — nativo</span><span class="tag">Inglés — B1</span></div>
+          </div>
+          <div class="stack__row">
+            <p class="label">Otros</p>
+            <div class="tags"><span class="tag">Carné de conducir tipo B</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="section__head"><h2 class="reveal">Contacto</h2></div>
+      <div class="contact reveal">
+        <p style="color:var(--ink-2)">
+          Abierto a oportunidades como desarrollador full stack o backend. La vía más rápida es el
+          correo o LinkedIn; respondo en el mismo día.
+        </p>
+        <div class="contact__links">
+          <a href="mailto:avalfdez@gmail.com"><span class="label">Email</span>avalfdez@gmail.com</a>
+          <a href="https://www.linkedin.com/in/albertovalfernandez" target="_blank" rel="noopener"><span class="label">LinkedIn</span>/in/albertovalfernandez</a>
+          <a href="https://github.com/avalf27" target="_blank" rel="noopener"><span class="label">GitHub</span>github.com/avalf27</a>
+          <a href="tel:+34639322346"><span class="label">Teléfono</span>+34 639 322 346</a>
+          <a href="CV_Alberto_Val.pdf" download><span class="label">CV</span>CV_Alberto_Val.pdf</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <span>Alberto Val Fernández — Andorra (Teruel), España</span>
+  <span>Actualizado en septiembre de 2026</span>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ── Tema ──────────────────────────────────────────────────────── */
+  /* El tema guardado ya se aplicó en <head>. */
+  var btn = document.getElementById("theme");
+
+  function temaActual(){
+    return root.getAttribute("data-theme") ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  }
+  btn.addEventListener("click", function(){
+    var siguiente = temaActual() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", siguiente);
+    try { localStorage.setItem("tema", siguiente); } catch(e){}
+    leerPaleta();
+    /* Con el bucle parado (movimiento reducido) la curva no se repintaría sola. */
+    if (!corriendo) pintar();
+  });
+
+  /* ── Retrato: si no hay foto.jpg, se muestra el monograma ──────── */
+  var retrato = document.getElementById("retrato");
+  var foto = document.getElementById("foto");
+  function sinFoto(){ retrato.classList.add("is-empty"); }
+  if (foto.complete && foto.naturalWidth === 0) sinFoto();
+  foto.addEventListener("error", sinFoto);
+
+  /* Parallax del retrato siguiendo el puntero. */
+  var marco = document.getElementById("marco");
+  if (!reducido && window.matchMedia("(pointer:fine)").matches) {
+    retrato.addEventListener("pointermove", function(ev){
+      var r = retrato.getBoundingClientRect();
+      var x = (ev.clientX - r.left) / r.width - .5;
+      var y = (ev.clientY - r.top) / r.height - .5;
+      marco.style.transform = "rotateY(" + (x * 11) + "deg) rotateX(" + (-y * 11) + "deg) translateZ(14px)";
+    });
+    retrato.addEventListener("pointerleave", function(){ marco.style.transform = ""; });
+  }
+
+  /* ── Tarjetas: inclinación 3D y brillo bajo el cursor ──────────── */
+  if (!reducido && window.matchMedia("(pointer:fine)").matches) {
+    Array.prototype.forEach.call(document.querySelectorAll(".card"), function(tarjeta){
+      tarjeta.addEventListener("pointermove", function(ev){
+        var r = tarjeta.getBoundingClientRect();
+        var x = (ev.clientX - r.left) / r.width;
+        var y = (ev.clientY - r.top) / r.height;
+        tarjeta.style.setProperty("--mx", (x * 100) + "%");
+        tarjeta.style.setProperty("--my", (y * 100) + "%");
+        tarjeta.style.transform =
+          "perspective(900px) rotateY(" + ((x - .5) * 5) + "deg) rotateX(" + ((.5 - y) * 5) + "deg) translateY(-3px)";
+      });
+      tarjeta.addEventListener("pointerleave", function(){ tarjeta.style.transform = ""; });
+    });
+  }
+
+  /* ── Revelado al hacer scroll ──────────────────────────────────── */
+  var obsRev = null;
+
+  function observarPendientes(){
+    if (!obsRev) return;
+    Array.prototype.forEach.call(
+      document.querySelectorAll(".reveal:not(.is-in), .section:not(.is-in)"),
+      function(el){ obsRev.observe(el); }
+    );
+  }
+
+  if ("IntersectionObserver" in window) {
+    obsRev = new IntersectionObserver(function(entradas, o){
+      entradas.forEach(function(e){
+        if (!e.isIntersecting) return;
+        e.target.classList.add("is-in");
+        o.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: .08 });
+
+    /* Escalonado dentro de cada grupo de tarjetas. */
+    Array.prototype.forEach.call(document.querySelectorAll(".projects .card"), function(c, i){
+      c.style.transitionDelay = (i * 90) + "ms";
+      /* El retardo solo vale para la entrada; después el hover responde sin demora. */
+      c.addEventListener("transitionend", function fin(ev){
+        if (ev.target !== c || ev.propertyName !== "opacity") return;
+        c.style.transitionDelay = "";
+        c.removeEventListener("transitionend", fin);
+      });
+    });
+    observarPendientes();
+  } else {
+    Array.prototype.forEach.call(document.querySelectorAll(".reveal, .section"), function(el){
+      el.classList.add("is-in");
+    });
+  }
+
+  /* ── Saltos desde el índice ────────────────────────────────────────
+     Con scroll suave el observador sigue disparando mientras la página está
+     en movimiento: las secciones que atraviesa animan fuera de pantalla y el
+     destino (Contacto, al final de la página) llega con la animación a medias.
+     Se suspende el revelado durante el salto y se reanuda al posarse el
+     scroll, así la sección de destino anima entera y ya a la vista. */
+  var tempSalto = null;
+
+  function enMovimiento(){
+    clearTimeout(tempSalto);
+    tempSalto = setTimeout(finSalto, 130);
+  }
+  function finSalto(){
+    clearTimeout(tempSalto);
+    tempSalto = null;
+    window.removeEventListener("scroll", enMovimiento);
+    observarPendientes();
+  }
+  function iniciarSalto(){
+    if (!obsRev) return;
+    obsRev.disconnect();
+    window.removeEventListener("scroll", enMovimiento);
+    window.addEventListener("scroll", enMovimiento, { passive: true });
+    clearTimeout(tempSalto);
+    /* Por si el destino ya estaba a la vista y no llega a haber scroll. */
+    tempSalto = setTimeout(finSalto, 300);
+  }
+
+  document.addEventListener("click", function(ev){
+    var enlace = ev.target && ev.target.closest ? ev.target.closest('a[href^="#"]') : null;
+    if (!enlace) return;
+    var destino = enlace.getAttribute("href");
+    if (destino.length > 1 && document.getElementById(destino.slice(1))) iniciarSalto();
+  });
+
+  /* ── Índice lateral ────────────────────────────────────────────── */
+  var enlaces = Array.prototype.slice.call(document.querySelectorAll(".rail a"));
+  var secciones = enlaces.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  if ("IntersectionObserver" in window && secciones.length && secciones.every(Boolean)) {
+    var visibles = {};
+    var marcadoPedido = false;
+
+    function marcarActiva(){
+      marcadoPedido = false;
+      var activa = null;
+      /* Al final de la página la última sección puede no llegar a la banda de
+         detección; sin esto el índice se queda sin ninguna entrada marcada
+         justo al pulsar Contacto. */
+      var alFondo = window.innerHeight + window.pageYOffset >=
+                    document.documentElement.scrollHeight - 4;
+      if (alFondo) {
+        activa = secciones[secciones.length - 1];
+      } else {
+        for (var i = 0; i < secciones.length; i++) {
+          if (visibles[secciones[i].id]) { activa = secciones[i]; break; }
+        }
+      }
+      enlaces.forEach(function(a, j){
+        a.setAttribute("aria-current", activa && secciones[j] === activa ? "true" : "false");
+      });
+    }
+    function pedirMarcado(){
+      if (marcadoPedido) return;
+      marcadoPedido = true;
+      requestAnimationFrame(marcarActiva);
+    }
+
+    var obsNav = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(e){ visibles[e.target.id] = e.isIntersecting; });
+      pedirMarcado();
+    }, { rootMargin: "-20% 0px -70% 0px" });
+    secciones.forEach(function(s){ obsNav.observe(s); });
+    window.addEventListener("scroll", pedirMarcado, { passive: true });
+  }
+
+  /* ── Entrada del titular y del cargo ───────────────────────────── */
+  var lineas = document.querySelectorAll(".lift");
+  Array.prototype.forEach.call(lineas, function(l, i){
+    l.style.transitionDelay = (140 + i * 110) + "ms";
+  });
+  /* Dos fotogramas de margen para que el estado inicial llegue a pintarse. */
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      Array.prototype.forEach.call(lineas, function(l){ l.classList.add("is-in"); });
+    });
+  });
+
+  /* El texto real vive en el HTML (sin JS y para buscadores). La animación se
+     pinta en un span oculto a lectores de pantalla, que leen la copia sr-only. */
+  var rolP = document.querySelector(".role");
+  var textoRol = rolP.textContent.trim();
+  if (!reducido) {
+    /* Cada letra se estabiliza tras unos fotogramas de ruido: lectura de instrumento. */
+    var ruido = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/\\<>_-#*+";
+    var fijadas = 0, marcoN = 0;
+    rolP.innerHTML = '<span class="sr-only"></span><span aria-hidden="true"></span>';
+    rolP.firstChild.textContent = textoRol;
+    var rol = rolP.lastChild;
+    rol.innerHTML = '<span class="caret">_</span>';
+    setTimeout(function(){
+      (function tick(){
+        var salida = "";
+        for (var i = 0; i < textoRol.length; i++) {
+          if (i < fijadas) salida += textoRol[i];
+          else if (i < fijadas + 6) salida += ruido[Math.floor(Math.random() * ruido.length)];
+        }
+        rol.innerHTML = salida.replace(/</g, "&lt;") + '<span class="caret">_</span>';
+        marcoN++;
+        if (marcoN % 2 === 0) fijadas++;
+        if (fijadas <= textoRol.length) requestAnimationFrame(tick);
+        else rol.textContent = textoRol;
+      })();
+    }, 520);
+  }
+
+  /* ── Curva de demanda con corriente en circulación ─────────────── */
+  var lienzo = document.getElementById("curve");
+  var ctx = lienzo.getContext("2d");
+  var acento = "#D9884A", linea = "#24323A";
+  var progreso = reducido ? 1 : 0;
+  var w = 0, h = 0;
+
+  function leerPaleta(){
+    var estilo = getComputedStyle(root);
+    acento = estilo.getPropertyValue("--accent").trim() || acento;
+    linea = estilo.getPropertyValue("--line").trim() || linea;
+  }
+
+  /* Curva de demanda diaria: valle nocturno, pico de mediodía, punta de tarde. */
+  function altura(t){
+    return 0.30
+      + 0.30 * Math.exp(-Math.pow((t - 0.52) / 0.13, 2))
+      + 0.44 * Math.exp(-Math.pow((t - 0.82) / 0.10, 2))
+      - 0.14 * Math.exp(-Math.pow((t - 0.18) / 0.14, 2))
+      + 0.022 * Math.sin(t * 34);
+  }
+  function y(t){ return h - altura(t) * h * 0.88; }
+
+  /* Partículas: la corriente recorriendo el conductor. */
+  var particulas = [];
+  for (var i = 0; i < 26; i++) {
+    particulas.push({ t: Math.random(), v: 0.0012 + Math.random() * 0.0022, r: 0.8 + Math.random() * 1.5 });
+  }
+
+  function medir(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = lienzo.clientWidth; h = lienzo.clientHeight;
+    if (!w || !h) return false;
+    lienzo.width = Math.round(w * dpr);
+    lienzo.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return true;
+  }
+
+  function pintar(){
+    if (!w || !h) return;
+    ctx.clearRect(0, 0, w, h);
+
+    /* Retícula de medición. */
+    ctx.strokeStyle = linea; ctx.globalAlpha = .55; ctx.lineWidth = 1;
+    for (var g = 1; g < 6; g++) {
+      var x = Math.round((w / 6) * g) + .5;
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+
+    var pasos = Math.max(90, Math.round(w / 5));
+    var hasta = Math.round(pasos * progreso);
+    if (hasta < 2) return;
+
+    function trazar(){
+      ctx.beginPath();
+      ctx.moveTo(0, y(0));
+      for (var k = 1; k <= hasta; k++) ctx.lineTo((k / pasos) * w, y(k / pasos));
+    }
+
+    /* Relleno bajo la curva. */
+    var grad = ctx.createLinearGradient(0, 0, 0, h);
+    grad.addColorStop(0, acento);
+    grad.addColorStop(1, "transparent");
+    ctx.save();
+    trazar();
+    ctx.lineTo((hasta / pasos) * w, h);
+    ctx.lineTo(0, h);
+    ctx.closePath();
+    ctx.globalAlpha = .09; ctx.fillStyle = grad; ctx.fill();
+    ctx.restore();
+
+    /* Conductor. */
+    trazar();
+    ctx.strokeStyle = acento; ctx.globalAlpha = .5; ctx.lineWidth = 1.5; ctx.lineJoin = "round";
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    /* Corriente. */
+    if (progreso >= 1) {
+      for (var p = 0; p < particulas.length; p++) {
+        var q = particulas[p];
+        ctx.beginPath();
+        ctx.arc(q.t * w, y(q.t), q.r, 0, Math.PI * 2);
+        ctx.fillStyle = acento;
+        ctx.globalAlpha = .28 + Math.sin(q.t * Math.PI) * .5;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+
+      /* Marca de la punta de tarde. */
+      var lat = 1 + Math.sin(Date.now() / 620) * .5;
+      ctx.beginPath();
+      ctx.arc(.82 * w, y(.82), 2.5 + lat, 0, Math.PI * 2);
+      ctx.strokeStyle = acento; ctx.globalAlpha = .55; ctx.lineWidth = 1; ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(.82 * w, y(.82), 2, 0, Math.PI * 2);
+      ctx.fillStyle = acento; ctx.globalAlpha = .9; ctx.fill();
+      ctx.globalAlpha = 1;
+    } else {
+      ctx.beginPath();
+      ctx.arc((hasta / pasos) * w, y(hasta / pasos), 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = acento; ctx.fill();
+    }
+  }
+
+  var corriendo = true;
+  function bucle(){
+    if (progreso < 1) progreso = Math.min(1, progreso + .014);
+    else for (var p = 0; p < particulas.length; p++) {
+      particulas[p].t += particulas[p].v;
+      if (particulas[p].t > 1) particulas[p].t -= 1;
+    }
+    pintar();
+    if (corriendo) requestAnimationFrame(bucle);
+  }
+
+  /* Se detiene cuando la cabecera sale de pantalla: nada de gastar batería. */
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function(ent){
+      var visible = ent[0].isIntersecting;
+      if (visible && !corriendo && !reducido) { corriendo = true; requestAnimationFrame(bucle); }
+      else if (!visible) corriendo = false;
+    }, { threshold: 0 }).observe(document.querySelector(".masthead"));
+  }
+
+  window.addEventListener("resize", function(){ if (medir()) pintar(); });
+  leerPaleta();
+  if (medir()) {
+    if (reducido) { pintar(); corriendo = false; }
+    else requestAnimationFrame(bucle);
+  }
+})();
+</script>
+</body>
+</html>
