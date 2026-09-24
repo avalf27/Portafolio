@@ -217,6 +217,10 @@ h1{font-size:var(--fs-hero); letter-spacing:-.035em; line-height:1.02}
 }
 
 main{padding:0 var(--pad); min-width:0}
+/* Fechas, periodos y lugares que no deben partirse entre líneas. */
+.nowrap{white-space:nowrap}
+/* Los títulos pequeños ocupan todo el ancho: balance los partía antes de tiempo. */
+h3{text-wrap:pretty}
 @media (min-width:1000px){main{padding-right:var(--pad); padding-left:0}}
 
 .section{padding:clamp(3rem,7vw,4.75rem) 0; border-bottom:1px solid var(--line-soft)}
@@ -318,6 +322,11 @@ main{padding:0 var(--pad); min-width:0}
 }
 .contact__links a:hover{color:var(--accent); border-bottom-color:var(--accent); transform:translateX(5px)}
 .contact__links .label{flex:0 0 4.5rem}
+/* En pantallas estrechas la etiqueta va encima: el valor no se parte a mitad de palabra. */
+@media (max-width:359px){
+  .contact__links a{flex-direction:column; gap:.1rem}
+  .contact__links .label{flex:none}
+}
 
 footer{
   padding:2rem var(--pad) 3rem; border-top:1px solid var(--line);
@@ -603,7 +612,7 @@ footer{
               <h3>ASIC XXI</h3>
               <span>Zaragoza</span>
             </div>
-            <p class="job__role">Desarrollador Full Stack · Prácticas (Sep–Dic 2024) → Contrato (Dic 2024–hoy)</p>
+            <p class="job__role">Desarrollador Full Stack · <span class="nowrap">Prácticas (Sep–Dic 2024)</span> → <span class="nowrap">Contrato (Dic 2024–hoy)</span></p>
             <ul class="bullets">
               <li>Desarrollo de un <strong>backoffice en Laravel/Blade</strong> para la gestión integral de facturación, clientes y suministros de comercializadoras de electricidad.</li>
               <li>Proyecto en <strong>Python</strong> para la recuperación y el tratamiento de datos energéticos actuales e históricos mediante las APIs de ESIOS y Red Eléctrica (PVOP).</li>
@@ -710,11 +719,11 @@ footer{
           </div>
           <div class="study">
             <h3>Técnico Superior en Desarrollo de Aplicaciones Web</h3>
-            <span>Colegio Montessori, Zaragoza · Dic 2024</span>
+            <span>Colegio Montessori, Zaragoza <span class="nowrap">· Dic 2024</span></span>
           </div>
           <div class="study">
             <h3>Técnico en Sistemas Microinformáticos y Redes</h3>
-            <span>IES Bajo Aragón, Alcañiz · Jun 2022</span>
+            <span>IES Bajo Aragón, Alcañiz <span class="nowrap">· Jun 2022</span></span>
           </div>
         </div>
         <div class="stack reveal">
@@ -751,7 +760,7 @@ footer{
 </div>
 
 <footer>
-  <span>Alberto Val Fernández — Andorra (Teruel), España</span>
+  <span>Alberto Val Fernández — <span class="nowrap">Andorra (Teruel), España</span></span>
   <span>Actualizado en septiembre de 2026</span>
 </footer>
 
