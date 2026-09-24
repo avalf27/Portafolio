@@ -315,18 +315,16 @@ h3{text-wrap:pretty}
 .contact{display:flex; flex-direction:column; gap:1.5rem}
 .contact__links{display:flex; flex-direction:column; gap:.15rem}
 .contact__links a{
-  display:inline-flex; align-items:baseline; gap:.85rem; width:fit-content; max-width:100%;
+  display:inline-flex; flex-wrap:wrap; align-items:baseline; gap:.1rem .85rem; width:fit-content; max-width:100%;
   padding:.55rem 0; text-decoration:none; font-family:var(--font-mono); font-size:.95rem;
-  border-bottom:1px solid transparent; overflow-wrap:anywhere;
+  border-bottom:1px solid transparent;
   transition:color .2s, border-color .2s, transform .25s var(--ease);
 }
 .contact__links a:hover{color:var(--accent); border-bottom-color:var(--accent); transform:translateX(5px)}
 .contact__links .label{flex:0 0 4.5rem}
-/* En pantallas estrechas la etiqueta va encima: el valor no se parte a mitad de palabra. */
-@media (max-width:359px){
-  .contact__links a{flex-direction:column; gap:.1rem}
-  .contact__links .label{flex:none}
-}
+/* Si el dato no cabe junto a la etiqueta baja entero a la línea siguiente;
+   solo se parte si ni siquiera cabe en todo el ancho. */
+.contact__val{min-width:0; overflow-wrap:anywhere}
 
 footer{
   padding:2rem var(--pad) 3rem; border-top:1px solid var(--line);
@@ -747,11 +745,11 @@ footer{
           correo o LinkedIn; respondo en el mismo día.
         </p>
         <div class="contact__links">
-          <a href="mailto:avalfdez@gmail.com"><span class="label">Email</span>avalfdez@gmail.com</a>
-          <a href="https://www.linkedin.com/in/albertovalfernandez" target="_blank" rel="noopener"><span class="label">LinkedIn</span>/in/albertovalfernandez</a>
-          <a href="https://github.com/avalf27" target="_blank" rel="noopener"><span class="label">GitHub</span>github.com/avalf27</a>
-          <a href="tel:+34639322346"><span class="label">Teléfono</span>+34 639 322 346</a>
-          <a href="CV_Alberto_Val.pdf" download><span class="label">CV</span>CV_Alberto_Val.pdf</a>
+          <a href="mailto:avalfdez@gmail.com"><span class="label">Email</span><span class="contact__val">avalfdez@gmail.com</span></a>
+          <a href="https://www.linkedin.com/in/albertovalfernandez" target="_blank" rel="noopener"><span class="label">LinkedIn</span><span class="contact__val">/in/albertovalfernandez</span></a>
+          <a href="https://github.com/avalf27" target="_blank" rel="noopener"><span class="label">GitHub</span><span class="contact__val">github.com/avalf27</span></a>
+          <a href="tel:+34639322346"><span class="label">Teléfono</span><span class="contact__val">+34 639 322 346</span></a>
+          <a href="CV_Alberto_Val.pdf" download><span class="label">CV</span><span class="contact__val">CV_Alberto_Val.pdf</span></a>
         </div>
       </div>
     </section>
@@ -761,7 +759,7 @@ footer{
 
 <footer>
   <span>Alberto Val Fernández — <span class="nowrap">Andorra (Teruel), España</span></span>
-  <span>Actualizado en septiembre de 2026</span>
+  <span>Actualizado en <span class="nowrap">septiembre de 2026</span></span>
 </footer>
 
 <script>
